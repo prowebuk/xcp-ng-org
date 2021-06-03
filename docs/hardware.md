@@ -20,6 +20,21 @@ In BIOS:
  - Advanced -> CPU Configuration -> Global C-state Control: Disabled
  - Advanced -> North Bridge -> Determinism Slider: Performance
 
+### HPE DL385 Gen8 AMD 62xx / 63xx CPUs
+
+According to the Citrix HCL, both the 62xx and 63xx series CPU's are supported as of XCP-ng/Xen 8.2 but the 62xx series processors get stuck in an infinite AMD-Vi: IO_PAGE_FAULT loop during installation / upgrade (from 7.x) which eventually results in a blank console however, these errors are still output to the serial console.
+
+63xx series processors also experience this issue but eventually time out and continue booting.
+
+Disable IOMMU in RBSU as follows:
+
+During Power-On Self-Test (POST), Press F9 to enter RBSU
+Navigate to System Options -> Processors -> AMD IOMMU
+Disable AMD IOMMU
+
+Note: Disabling IOMMU does not impact the performance or functionality of the system.
+https://support.hpe.com/hpesc/public/docDisplay?docId=c05207202&docLocale=en_US
+
 ### Network Cards
 
 
